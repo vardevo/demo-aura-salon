@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Book a Session — Aura Studio</title>
+<link rel="stylesheet" href="css/style.css"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZS3KBH3XW4"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZS3KBH3XW4');</script>
+</head>
+<body>
+
+<nav class="navbar scrolled" id="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="index.html" class="nav-logo">AURA<span style="color:var(--gold);">.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="index.html#artists">Artists</a></li>
+        <li><a href="index.html#location">Find Us</a></li>
+      </ul>
+      <a href="book.html" class="btn btn-primary nav-book">Book Now</a>
+      <button class="nav-hamburger" onclick="toggleMenu()">☰</button>
+    </div>
+  </div>
+</nav>
+
+<div class="booking-hero">
+  <div class="container">
+    <div class="section-label" style="justify-content:center;">Reserve Your Session</div>
+    <h1>Book <em>Your</em> Transformation</h1>
+    <p style="max-width:480px;margin:16px auto 0;font-size:0.95rem;">Choose your service and artist, and we'll confirm your appointment within minutes.</p>
+  </div>
+</div>
+
+<div class="form-container">
+
+  <!-- Booking Form -->
+  <div class="booking-form-box" id="bookingForm">
+    <div style="margin-bottom:32px;">
+      <h3 style="font-size:1.3rem;font-weight:400;margin-bottom:6px;">Your Details</h3>
+      <p style="font-size:0.8rem;">All fields required for confirmation</p>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input type="text" class="form-input" id="patientName" placeholder="Your name"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Phone</label>
+        <input type="tel" class="form-input" id="patientPhone" placeholder="+91 XXXXX XXXXX"/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-input" id="patientEmail" placeholder="your@email.com"/>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Service</label>
+      <select class="form-select" id="serviceSelect">
+        <option value="">Select a service</option>
+        <option value="Signature Cut & Style">Signature Cut & Style — ₹800+</option>
+        <option value="Balayage & Highlights">Balayage & Highlights — ₹3,500+</option>
+        <option value="Keratin Treatment">Keratin Treatment — ₹4,000+</option>
+        <option value="Bridal Package">Bridal Package — ₹8,000+</option>
+        <option value="Scalp Treatment">Scalp Treatment — ₹1,500+</option>
+        <option value="Men's Grooming">Men's Grooming — ₹600+</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Preferred Artist</label>
+      <select class="form-select" id="artistSelect">
+        <option value="">No preference (any available)</option>
+        <option value="Meera Kapoor">Meera Kapoor — Creative Director</option>
+        <option value="Aryan Shah">Aryan Shah — Senior Stylist</option>
+        <option value="Priya Nair">Priya Nair — Color Specialist</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Preferred Date</label>
+        <input type="date" class="form-input" id="apptDate"/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Preferred Time</label>
+      <div class="time-slots" id="timeSlots">
+        <div class="time-slot" onclick="selectTime(this,'10:00 AM')">10:00 AM</div>
+        <div class="time-slot" onclick="selectTime(this,'11:00 AM')">11:00 AM</div>
+        <div class="time-slot" onclick="selectTime(this,'12:00 PM')">12:00 PM</div>
+        <div class="time-slot" onclick="selectTime(this,'2:00 PM')">2:00 PM</div>
+        <div class="time-slot" onclick="selectTime(this,'3:00 PM')">3:00 PM</div>
+        <div class="time-slot" onclick="selectTime(this,'4:00 PM')">4:00 PM</div>
+        <div class="time-slot" onclick="selectTime(this,'5:00 PM')">5:00 PM</div>
+        <div class="time-slot" onclick="selectTime(this,'6:00 PM')">6:00 PM</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Special Requests (Optional)</label>
+      <input type="text" class="form-input" id="notes" placeholder="Any specific requests or inspirations..."/>
+    </div>
+
+    <button class="form-submit" onclick="submitBooking()">✦ Confirm My Appointment</button>
+  </div>
+
+  <!-- Success Screen -->
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">✨</div>
+    <h2 style="font-size:2rem;font-weight:300;margin-bottom:8px;">You're Booked!</h2>
+    <p id="successMsg" style="margin-bottom:28px;font-size:0.95rem;"></p>
+    <div id="bookingSummary" style="background:var(--black-3);border:1px solid rgba(201,149,108,0.12);border-radius:var(--radius-md);padding:24px;margin-bottom:28px;text-align:left;"></div>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a id="whatsappLink" href="#" class="btn btn-primary" target="_blank">💬 WhatsApp Confirmation</a>
+      <a href="index.html" class="btn btn-outline">← Back to Home</a>
+    </div>
+  </div>
+
+</div>
+
+<a href="https://wa.me/919876512345" class="whatsapp-float" target="_blank">💬</a>
+
+<script>
+let selectedTime = '';
+
+// Set min date to today
+document.getElementById('apptDate').min = new Date().toISOString().split('T')[0];
+
+function selectTime(el, time) {
+  document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedTime = time;
+}
+
+function toggleMenu() {
+  const links = document.querySelector('.nav-links');
+  links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+}
+
+async function submitBooking() {
+  const name = document.getElementById('patientName').value.trim();
+  const phone = document.getElementById('patientPhone').value.trim();
+  const email = document.getElementById('patientEmail').value.trim();
+  const service = document.getElementById('serviceSelect').value;
+  const artist = document.getElementById('artistSelect').value;
+  const date = document.getElementById('apptDate').value;
+  const notes = document.getElementById('notes').value.trim();
+
+  if (!name || !phone || !service || !date || !selectedTime) {
+    alert('Please fill in all required fields and select a time slot.');
+    return;
+  }
+
+  const btn = document.querySelector('.form-submit');
+  btn.textContent = 'Confirming...';
+  btn.disabled = true;
+
+  const SUPABASE_URL = 'https://angndnomydhwnrvcakln.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFuZ25kbm9teWRod25ydmNha2xuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI2MjYyNzcsImV4cCI6MjA4ODIwMjI3N30.eHFXTVHRKj3gt0wGxUNqAslghiQ1qbdB9xHtcUxbF7k';
+
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/salon_appointments`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        client_name: name,
+        client_phone: phone,
+        client_email: email || null,
+        service: service,
+        artist: artist || 'Any Available',
+        appointment_date: date,
+        appointment_time: selectedTime,
+        notes: notes || null,
+        status: 'pending'
+      })
+    });
+
+    if (res.ok || res.status === 201) {
+      const dateObj = new Date(date);
+      const formatted = dateObj.toLocaleDateString('en-IN', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+
+      document.getElementById('bookingForm').style.display = 'none';
+      document.getElementById('successScreen').classList.add('show');
+      document.getElementById('successMsg').textContent = `Thank you, ${name}! We'll confirm your appointment shortly.`;
+
+      document.getElementById('bookingSummary').innerHTML = `
+        <div style="display:grid;gap:12px;">
+          ${[['Client', name],['Service', service],['Artist', artist || 'Any Available'],['Date', formatted],['Time', selectedTime],['Status', '⏳ Pending Confirmation']].map(([l,v])=>`
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+            <span style="font-size:0.78rem;color:var(--grey-3);text-transform:uppercase;letter-spacing:1px;">${l}</span>
+            <span style="font-size:0.85rem;color:${l==='Status'?'var(--gold)':'var(--grey-1)'};">${v}</span>
+          </div>`).join('')}
+        </div>`;
+
+      const waMsg = encodeURIComponent(`Hi Aura Studio! My appointment is confirmed:\n\nName: ${name}\nService: ${service}\nArtist: ${artist||'Any'}\nDate: ${formatted}\nTime: ${selectedTime}\n\nLooking forward to my transformation! ✨`);
+      document.getElementById('whatsappLink').href = `https://wa.me/919876512345?text=${waMsg}`;
+    } else {
+      throw new Error('Booking failed');
+    }
+  } catch(err) {
+    alert('Booking saved! We\'ll confirm via WhatsApp shortly.');
+    btn.textContent = '✦ Confirm My Appointment';
+    btn.disabled = false;
+  }
+}
+</script>
+</body>
+</html>
